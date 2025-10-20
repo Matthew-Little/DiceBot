@@ -4,18 +4,18 @@
 	"description": "",
 	"license": "ISC",
 	"author": "Matt L.",
-	"type": "commonjs",
+	"type": "module",
 	"main": "DiceBot.ts",
 	"scripts": {
-		"test": "test"
+		"clean": "del /s /q build",
+		"build": "tsc --build",
+		"start": "npm run clean && npm run build && node build/index.js",
+		"startNoClean": "npm run build && node build/index.js"
 	},
 	"dependencies": {
 		"discord.js": "^14.23.2"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.38.0",
-		"eslint": "^9.38.0",
-		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.46.1"
+		"@eslint/js": "^9.38.0"
 	}
 }
