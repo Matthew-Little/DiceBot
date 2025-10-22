@@ -1,10 +1,10 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { Client, Collection, Events, GatewayIntentBits, MessageFlags, type Interaction } from "discord.js";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+import { Client, Events, GatewayIntentBits, MessageFlags, type Interaction } from "discord.js";
 import config from './config/config.json' with {type: "json"}; //modern syntax for importing json file as an object to access its properties
 import CustomClient from './models/CustomClient.ts';
-import type Command from './models/Command.ts';
+import CommandLoader from './utils/CommandLoader.ts';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,27 +16,8 @@ const client: CustomClient = new Client({ intents: [GatewayIntentBits.Guilds] })
 client.once(Events.ClientReady, (readyClient) => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
-
-client.commands = new Collection();
-const foldersPath: string = path.join(__dirname, 'commands');
-const commandFolders: string[] = fs.readdirSync(foldersPath);
-
-for (const folder of commandFolders) {
-	const commandsPath = path.join(foldersPath, folder);
-	const commandFiles = fs.readdirSync(commandsPath).filter((file) => file.endsWith('.ts'));
-	for (const file of commandFiles) {
-		let joinedPath = path.join(commandsPath, file);
-		//file:/// is required at the start of the path for newer versions of node.js ESM loader
-		const filePath = 'file:///' + joinedPath;
-		const command: Command = new (await import(filePath)).default();
-		if ('data' in command && 'Execute' in command) {
-			client.commands.set(command.name, command);
-
-		} else {
-			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property`);
-		}
-	}
-}
+console.log(__dirname);
+client.commands = await CommandLoader.LoadCommands(__dirname);
 
 //Log in to Discord with your client's token
 client.login(config.token);
