@@ -1,5 +1,5 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
-import config from '../config.json' with {type: "json"};
+import config from './config/config.json' with {type: "json"}; //modern syntax for importing json file as an object to access its properties
 
 //Create a new client instance
 const client: Client<boolean> = new Client({ intents: [GatewayIntentBits.Guilds] });
