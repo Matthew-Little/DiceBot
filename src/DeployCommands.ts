@@ -3,11 +3,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { REST, Routes } from 'discord.js';
 import config from './config/config.json' with {type: 'json'};
+import type Command from './models/Command.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const commands: object[] = [];
+const commands: Command[] = [];
 const foldersPath: string = path.join(__dirname, 'commands');
 const commandFolders: string[] = fs.readdirSync(foldersPath);
 
@@ -18,10 +19,9 @@ for (const folder of commandFolders) {
 		let joinedPath = path.join(commandsPath, file);
 		//file:/// is required at the start of the path for newer versions of node.js ESM loader
 		const filePath = 'file:///' + joinedPath;
-		console.log(filePath);
-		const command = (await import(filePath)).default;
-		if ('data' in command && 'execute' in command) {
-			commands.push(command.data.toJSON());
+		const command: Command = new (await import(filePath)).default();
+		if ('data' in command && 'Execute' in command) {
+			commands.push(command);
 
 		} else {
 			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property`);

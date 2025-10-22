@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { Client, Collection, Events, GatewayIntentBits, MessageFlags, type Interaction } from "discord.js";
 import config from './config/config.json' with {type: "json"}; //modern syntax for importing json file as an object to access its properties
 import CustomClient from './models/CustomClient.ts';
+import type Command from './models/Command.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,22 +28,13 @@ for (const folder of commandFolders) {
 		let joinedPath = path.join(commandsPath, file);
 		//file:/// is required at the start of the path for newer versions of node.js ESM loader
 		const filePath = 'file:///' + joinedPath;
-		console.log(filePath);
-		let command;
-		import(filePath)
-			.then(filePathExport => {
-				command = filePathExport.default;
-				// Set a new item in the Collection with the key as the command name and the value as the exported module
-				if ('data' in command && 'execute' in command) {
-					client.commands.set(command.data.name, command);
-				} else {
-					console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property`);
-				}
-			})
-			.catch(error => {
-				console.error(`[ERROR: ${error}] Failed to load the command at ${filePath}`);
-			});
+		const command: Command = new (await import(filePath)).default();
+		if ('data' in command && 'Execute' in command) {
+			client.commands.set(command.name, command);
 
+		} else {
+			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property`);
+		}
 	}
 }
 
@@ -57,12 +49,12 @@ client.on(Events.InteractionCreate, async (interaction: Interaction) => {
 	const client = interaction.client as CustomClient;
 	const command = client.commands.get(interaction.commandName);
 
-	if (!command) {
-		console.error(`No command matching ${interaction.commandName} was found.`);
-	}
-
 	try {
-		await command.execute(interaction);
+		if (!command) {
+			console.error(`No command matching ${interaction.commandName} was found.`);
+		} else {
+			await command.Execute(interaction);
+		}
 	} catch (error) {
 		console.error(error);
 		if (interaction.replied || interaction.deferred) {
