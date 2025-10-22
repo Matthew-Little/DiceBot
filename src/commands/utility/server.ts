@@ -9,6 +9,6 @@ module.exports = {
 		// await interaction.reply(
 		// 	`This server is ${interaction.guild.name} and has ${interaction.guild.memberCount} members.`,
 		// );
-		await interaction.reply('to many nullable properties make me sad');
+		await interaction.reply('too many nullable properties make me sad');
 	},
 };
