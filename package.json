@@ -9,8 +9,8 @@
 	"scripts": {
 		"clean": "del /s /q build",
 		"build": "tsc --build",
-		"start": "npm run clean && npm run build && node build/index.js",
-		"startNoClean": "npm run build && node build/index.js"
+		"start": "npm run clean && npm run build && node src/DiceBot.ts",
+		"startNoClean": "npm run build && node src/DiceBot.ts"
 	},
 	"dependencies": {
 		"discord.js": "^14.23.2"
