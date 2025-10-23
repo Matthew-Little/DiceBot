@@ -1,12 +1,13 @@
-import { SlashCommandBuilder, type CommandInteraction } from "discord.js";
+import { SlashCommandBuilder } from "discord.js";
+import type IEvent from '../Interfaces/IEvent.ts'
 
-export default abstract class Command {
+export default abstract class Command implements IEvent {
 	name: string;
 	description: string;
 
 	data: SlashCommandBuilder;
 
-	abstract Execute(interaction: CommandInteraction): Promise<any>
+	abstract Execute(...args: any[]): any | Promise<any>
 
 	constructor(name: string, description: string) {
 		this.name = name;

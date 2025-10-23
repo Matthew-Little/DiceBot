@@ -3,7 +3,7 @@ import path from 'node:path';
 import type Command from "../models/Command.ts";
 import { Collection } from "discord.js";
 
-export default class CommandLoader {
+export default class CommandHandler {
 
 	public static async LoadCommands(pathToFolders: string): Promise<Collection<string, Command>> {
 		const commands: Collection<string, Command> = new Collection();
