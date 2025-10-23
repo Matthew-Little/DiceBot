@@ -1,18 +1,13 @@
-import { Events } from "discord.js";
-import type CustomClient from "../models/CustomClient.ts";
+import { Client, Events } from "discord.js";
 import Event from "../models/Event.ts";
 
-export default class Ready extends Event {
+export default class Ready extends Event<[Client<true>]> {
 
 	constructor() {
 		super(Events.ClientReady, true);
 	}
 
-	Execute(client: CustomClient) {
-		if (!client.user) {
-			console.log(`[WARNING] The ${client}'s 'user' is null or undefined`);
-		} else {
-			console.log(`Ready! Logged in as ${client.user.tag}`);
-		}
+	Execute(client: Client<true>): void {
+		console.log(`Ready! Logged in as ${client.user.tag}`);
 	}
 }

@@ -1,4 +1,4 @@
-export default interface IEvent<T extends any[] = any[]> {
+export default interface IEvent<T extends any[]> {
 	name: string;
-	Execute(...args: T): any | Promise<any>
+	Execute(...args: T): void | Promise<void>
 }

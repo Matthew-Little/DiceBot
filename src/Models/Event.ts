@@ -1,6 +1,6 @@
 import type IEvent from "../Interfaces/IEvent.ts";
 
-export default abstract class Event implements IEvent {
+export default abstract class Event<T extends any[] = any[]> implements IEvent<T> {
 
 	name: string;
 	once: boolean;
@@ -10,5 +10,5 @@ export default abstract class Event implements IEvent {
 		this.once = once;
 	}
 
-	abstract Execute(...args: any[]): any | Promise<any>
+	abstract Execute(...args: T): void | Promise<void>
 }

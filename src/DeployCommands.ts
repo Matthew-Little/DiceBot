@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Collection, REST, Routes } from 'discord.js';
+import type { RESTPutAPIApplicationCommandsResult } from 'discord.js';
 import config from './config/config.json' with {type: 'json'};
 import type Command from './models/Command.ts';
 import CommandHandler from './utils/CommandHandler.ts';
@@ -18,7 +19,7 @@ const rest = new REST().setToken(config.token);
 		console.log(`Started refreshing ${commands.size} application (/) commands.`)
 		//for global commands replace applicationGuildCommands(clientId,guildId) with applicationCommands(clientId)
 		//TODO: figure out how to replace any
-		const data: any = await rest.put(Routes.applicationGuildCommands(config.clientId, config.guildId), { body: commandList });
+		const data = await rest.put(Routes.applicationGuildCommands(config.clientId, config.guildId), { body: commandList }) as RESTPutAPIApplicationCommandsResult;
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 	} catch (error) {

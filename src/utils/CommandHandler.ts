@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type Command from "../models/Command.ts";
 import { Collection } from "discord.js";
+import { pathToFileURL } from 'node:url';
 
 export default class CommandHandler {
 
@@ -11,12 +12,12 @@ export default class CommandHandler {
 		const commandFolders: string[] = fs.readdirSync(foldersPath);
 
 		for (const folder of commandFolders) {
-			const commandsPath = path.join(foldersPath, folder);
-			const commandFiles = fs.readdirSync(commandsPath).filter((file) => file.endsWith('.ts'));
+			const commandsPath: string = path.join(foldersPath, folder);
+			const commandFiles: string[] = fs.readdirSync(commandsPath).filter((file) => file.endsWith('.ts'));
 			for (const file of commandFiles) {
 				let joinedPath = path.join(commandsPath, file);
-				//file:/// is required at the start of the path for newer versions of node.js ESM loader
-				const filePath = 'file:///' + joinedPath;
+				//pathToFileURL handles file paths for all OS and properly encodes special characters
+				const filePath = pathToFileURL(joinedPath).href;
 				const command: Command = new (await import(filePath)).default();
 				if ('data' in command && 'Execute' in command) {
 					commands.set(command.name, command);

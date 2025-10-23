@@ -7,7 +7,7 @@ export default class Server extends Command {
 		super('server', 'Provides information about the server.');
 	}
 
-	async Execute(interaction: CommandInteraction) {
+	async Execute(interaction: CommandInteraction): Promise<void> {
 		// interaction.guild is the object representing the Guild in which the command was run
 		// guild could be null
 		// await interaction.reply(

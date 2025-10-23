@@ -1,4 +1,4 @@
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
 import fs from 'node:fs';
 import { Client, GatewayIntentBits } from "discord.js";
@@ -13,8 +13,6 @@ const __dirname = path.dirname(__filename);
 
 //Create a new client instance
 const client: CustomClient = new Client({ intents: [GatewayIntentBits.Guilds] }) as CustomClient;
-//When the client is ready, run this code (only once)
-//The distinction between 'client: Client<boolean>' and 'readyClient: Client<true> is it makes some properties non-nullable.
 
 client.commands = await CommandHandler.LoadCommands(__dirname);
 
@@ -23,8 +21,7 @@ const eventFiles = fs.readdirSync(eventsPath).filter((file) => file.endsWith('.t
 
 for (const file of eventFiles) {
 	let joinedPath = path.join(eventsPath, file);
-	//file:/// is required at the start of the path for newer versions of node.js ESM loader
-	const filePath = 'file:///' + joinedPath;
+	const filePath: string = pathToFileURL(joinedPath).href;
 	const event: Event = new (await import(filePath)).default();
 
 	if (event.once) {
