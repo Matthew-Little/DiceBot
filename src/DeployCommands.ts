@@ -18,7 +18,6 @@ const rest = new REST().setToken(config.token);
 	try {
 		console.log(`Started refreshing ${commands.size} application (/) commands.`)
 		//for global commands replace applicationGuildCommands(clientId,guildId) with applicationCommands(clientId)
-		//TODO: figure out how to replace any
 		const data = await rest.put(Routes.applicationGuildCommands(config.clientId, config.guildId), { body: commandList }) as RESTPutAPIApplicationCommandsResult;
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);

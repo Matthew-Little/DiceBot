@@ -1,12 +1,12 @@
-import { Client, Collection } from 'discord.js';
+import { Client, Collection, type ClientOptions } from 'discord.js';
 import type Command from './Command.ts';
 
 export default class CustomClient extends Client {
 
 	commands: Collection<string, Command>
 
-	constructor() {
-		super({ intents: [] })
+	constructor(options: ClientOptions) {
+		super(options);
 		this.commands = new Collection();
 	}
 }
