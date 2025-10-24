@@ -3,12 +3,19 @@ import fs from "node:fs";
 import { pathToFileURL } from "node:url";
 
 export default abstract class BaseLoader {
-	public static async Load<T>(itemType: string, pathToItems: string): Promise<T[]> {
+
+	/**
+	 * loads an array of type T items from a folder, ignoring any non-typescript files
+	 * @param folderName 
+	 * @param pathToFolder 
+	 * @returns 
+	 */
+	public static async Load<T>(folderName: string, pathToFolder: string): Promise<T[]> {
 		const items: T[] = [];
-		const itemPath: string = path.join(pathToItems, itemType);
-		const itemFiles = fs.readdirSync(itemPath).filter((file) => file.endsWith('.ts'));
+		const folderPath: string = path.join(folderName, pathToFolder);
+		const itemFiles = fs.readdirSync(folderPath).filter((file) => file.endsWith('.ts'));
 		for (const file of itemFiles) {
-			const joinedPath: string = path.join(itemPath, file);
+			const joinedPath: string = path.join(folderPath, file);
 			const filePath: string = pathToFileURL(joinedPath).href;
 			const item: T = new (await import(filePath)).default();
 			items.push(item);
