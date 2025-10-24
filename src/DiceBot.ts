@@ -1,6 +1,5 @@
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 import path from "node:path";
-import fs from 'node:fs';
 import { Client, GatewayIntentBits } from "discord.js";
 import config from './config/config.json' with {type: "json"}; //modern syntax for importing json file as an object to access its properties
 import CustomClient from './models/CustomClient.ts';
