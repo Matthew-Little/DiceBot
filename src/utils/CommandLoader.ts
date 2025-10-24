@@ -4,7 +4,7 @@ import type Command from "../models/Command.ts";
 import { Collection } from "discord.js";
 import { pathToFileURL } from 'node:url';
 
-export default class CommandHandler {
+export default class CommandLoader {
 
 	/**
 	 * This function currently creates a collection of Commands, finds the command folders from the path parameter, and adds the commands to the collection before returning all of the commands. 

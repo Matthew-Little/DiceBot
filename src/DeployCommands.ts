@@ -4,12 +4,12 @@ import { Collection, REST, Routes } from 'discord.js';
 import type { RESTPutAPIApplicationCommandsResult } from 'discord.js';
 import config from './config/config.json' with {type: 'json'};
 import type Command from './models/Command.ts';
-import CommandHandler from './utils/CommandHandler.ts';
+import CommandLoader from './utils/CommandLoader.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const commands: Collection<string, Command> = await CommandHandler.LoadCommands(__dirname);
+const commands: Collection<string, Command> = await CommandLoader.LoadCommands(__dirname);
 const commandList: Command[] = Array.from(commands.values());
 
 const rest = new REST().setToken(config.token);

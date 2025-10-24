@@ -4,8 +4,9 @@ import fs from 'node:fs';
 import { Client, GatewayIntentBits } from "discord.js";
 import config from './config/config.json' with {type: "json"}; //modern syntax for importing json file as an object to access its properties
 import CustomClient from './models/CustomClient.ts';
-import CommandHandler from './utils/CommandHandler.ts';
 import type Event from "./models/Event.ts";
+import CommandLoader from "./utils/CommandLoader.ts";
+import EventLoader from "./utils/EventLoader.ts";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -14,15 +15,11 @@ const __dirname = path.dirname(__filename);
 //Create a new client instance
 const client: CustomClient = new Client({ intents: [GatewayIntentBits.Guilds] }) as CustomClient;
 
-client.commands = await CommandHandler.LoadCommands(__dirname);
+client.commands = await CommandLoader.LoadCommands(__dirname);
 
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter((file) => file.endsWith('.ts'));
+const eventList: Event[] = await EventLoader.LoadEvents(__dirname);
 
-for (const file of eventFiles) {
-	let joinedPath = path.join(eventsPath, file);
-	const filePath: string = pathToFileURL(joinedPath).href;
-	const event: Event = new (await import(filePath)).default();
+for (const event of eventList) {
 
 	if (event.once) {
 		client.once(event.name, (...args) => event.Execute(...args));

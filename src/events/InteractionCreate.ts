@@ -1,4 +1,4 @@
-import { Events, MessageFlags, type Interaction } from "discord.js";
+import { ChatInputCommandInteraction, Events, MessageFlags, type Interaction } from "discord.js";
 import Event from "../models/Event.ts";
 import type CustomClient from "../models/CustomClient.ts";
 
@@ -10,11 +10,9 @@ export default class InteractionCreate extends Event<[Interaction]> {
 	/**
 	 * This is the command event handler that recieves and handles all chat input commands
 	 * @param interaction 
-	 * @returns 
+	 * @returns Promise<void>
 	 */
-	async Execute(interaction: Interaction): Promise<void> {
-		if (!interaction.isChatInputCommand()) return;
-
+	async Execute(interaction: ChatInputCommandInteraction): Promise<void> {
 		const client: CustomClient = interaction.client as CustomClient;
 		const command = client.commands.get(interaction.commandName);
 
