@@ -6,6 +6,11 @@ import { pathToFileURL } from 'node:url';
 
 export default class CommandHandler {
 
+	/**
+	 * This function currently creates a collection of Commands, finds the command folders from the path parameter, and adds the commands to the collection before returning all of the commands. 
+	 * @param pathToFolders 
+	 * @returns Promise<Collection<string,Command>>
+	 */
 	public static async LoadCommands(pathToFolders: string): Promise<Collection<string, Command>> {
 		const commands: Collection<string, Command> = new Collection();
 		const foldersPath: string = path.join(pathToFolders, 'commands');

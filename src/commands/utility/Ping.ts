@@ -8,6 +8,11 @@ export default class Ping extends Command {
 		super('ping', 'Replies with Pong');
 	}
 
+	/**
+	 * Basic function for testing the bot is online and responding to commands
+	 * @param interaction 
+	 * @returns Promise<void>
+	 */
 	async Execute(interaction: CommandInteraction): Promise<void> {
 		await interaction.reply('Pong!');
 	}

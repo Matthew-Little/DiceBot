@@ -7,6 +7,11 @@ export default abstract class Command implements IEvent<[CommandInteraction]> {
 
 	data: SlashCommandBuilder;
 
+	/**
+	 * Abstract Execute function for fufilling contract(s)
+	 * @param interaction 
+	 * @returns void | Promise<void>
+	 */
 	abstract Execute(interaction: CommandInteraction): void | Promise<void>
 
 	constructor(name: string, description: string) {

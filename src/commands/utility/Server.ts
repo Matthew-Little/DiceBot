@@ -7,12 +7,19 @@ export default class Server extends Command {
 		super('server', 'Provides information about the server.');
 	}
 
+	/**
+	 * A way to check the current server and how many members it has
+	 * @param interaction 
+	 * @returns Promise<void>
+	 */
 	async Execute(interaction: CommandInteraction): Promise<void> {
-		// interaction.guild is the object representing the Guild in which the command was run
-		// guild could be null
-		// await interaction.reply(
-		// 	`This server is ${interaction.guild.name} and has ${interaction.guild.memberCount} members.`,
-		// );
-		await interaction.reply('too many nullable properties make me sad');
+		if (!interaction.guild) {
+			console.log('The guild does not exist!');
+			return;
+		}
+
+		await interaction.reply(
+			`This server is ${interaction.guild.name} and has ${interaction.guild.memberCount} members.`,
+		);
 	}
 };

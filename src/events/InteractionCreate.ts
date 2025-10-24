@@ -7,6 +7,11 @@ export default class InteractionCreate extends Event<[Interaction]> {
 	constructor() {
 		super(Events.InteractionCreate, false);
 	}
+	/**
+	 * This is the command event handler that recieves and handles all chat input commands
+	 * @param interaction 
+	 * @returns 
+	 */
 	async Execute(interaction: Interaction): Promise<void> {
 		if (!interaction.isChatInputCommand()) return;
 

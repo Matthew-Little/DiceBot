@@ -10,5 +10,10 @@ export default abstract class Event<T extends any[] = any[]> implements IEvent<T
 		this.once = once;
 	}
 
+	/**
+	 * Abstract function for fufilling contract
+	 * @param args 
+	 * @returns void | Promise<void>
+	 */
 	abstract Execute(...args: T): void | Promise<void>
 }
