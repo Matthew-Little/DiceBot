@@ -12,7 +12,7 @@ export default abstract class BaseLoader {
 	 */
 	public static async Load<T>(folderName: string, pathToFolder: string): Promise<T[]> {
 		const items: T[] = [];
-		const folderPath: string = path.join(folderName, pathToFolder);
+		const folderPath: string = path.join(pathToFolder, folderName);
 		const itemFiles = fs.readdirSync(folderPath).filter((file) => file.endsWith('.ts'));
 		for (const file of itemFiles) {
 			const joinedPath: string = path.join(folderPath, file);
