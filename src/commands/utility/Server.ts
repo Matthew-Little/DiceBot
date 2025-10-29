@@ -1,5 +1,6 @@
 import type { CommandInteraction } from "discord.js";
 import Command from '../../models/Command.ts';
+import CommandError from "../../error/CommandError.ts";
 
 export default class Server extends Command {
 
@@ -13,9 +14,9 @@ export default class Server extends Command {
 	 * @returns Promise<void>
 	 */
 	async Execute(interaction: CommandInteraction): Promise<void> {
+
 		if (!interaction.guild) {
-			console.log('The guild does not exist!');
-			return;
+			throw new CommandError(`No guild found when executing command: ${interaction.commandName}`);
 		}
 
 		await interaction.reply(
