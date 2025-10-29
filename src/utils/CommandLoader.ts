@@ -3,8 +3,9 @@ import path from 'node:path';
 import type Command from "../models/Command.ts";
 import { Collection } from "discord.js";
 import { pathToFileURL } from 'node:url';
+import BaseLoader from '../models/BaseLoader.ts';
 
-export default class CommandLoader {
+export default class CommandLoader extends BaseLoader {
 
 	/**
 	 * This function currently creates a collection of Commands, finds the command folders from the path parameter, and adds the commands to the collection before returning all of the commands. 
@@ -13,14 +14,12 @@ export default class CommandLoader {
 	 */
 	public static async LoadCommands(pathToFolders: string): Promise<Collection<string, Command>> {
 		const commands: Collection<string, Command> = new Collection();
-		const foldersPath: string = path.join(pathToFolders, 'commands');
-		const commandFolders: string[] = fs.readdirSync(foldersPath);
+		const commandFolders: string[] = await this.GetFilePaths('commands', pathToFolders);
 
 		for (const folder of commandFolders) {
-			const commandsPath: string = path.join(foldersPath, folder);
-			const commandFiles: string[] = fs.readdirSync(commandsPath).filter((file) => file.endsWith('.ts'));
+			const commandFiles: string[] = fs.readdirSync(folder).filter((file) => file.endsWith('.ts'));
 			for (const file of commandFiles) {
-				let joinedPath = path.join(commandsPath, file);
+				let joinedPath = path.join(folder, file);
 				//pathToFileURL handles file paths for all OS and properly encodes special characters
 				const filePath = pathToFileURL(joinedPath).href;
 				const command: Command = new (await import(filePath)).default();
