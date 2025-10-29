@@ -1,7 +1,7 @@
 import path from "node:path";
 import fs from "node:fs";
 import { pathToFileURL } from "node:url";
-import { Collection, ThreadMemberFlagsBitField } from "discord.js";
+import { Collection } from "discord.js";
 
 export default abstract class BaseLoader {
 
