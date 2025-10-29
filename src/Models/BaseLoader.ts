@@ -23,6 +23,12 @@ export default abstract class BaseLoader {
 		return items;
 	}
 
+	/** 
+	 * Creates an array of filePaths for loading files (specifically commands and events)
+	 * @param folderName
+	 * @param pathToFolder 
+	 * @returns a string[] of filePaths
+	*/
 	protected static async GetFilePaths(folderName: string, pathToFolder: string): Promise<string[]> {
 		const filePaths: string[] = [];
 		const folders: Collection<string, string> = await this.GetFolders(folderName, pathToFolder);
@@ -35,6 +41,12 @@ export default abstract class BaseLoader {
 		return filePaths;
 	}
 
+	/**
+	 * Creates a map of folders found inside a specified folder from a specified path to that folder
+	 * @param folderName name of the folder containing the folders we are retrieving
+	 * @param pathToFolder path to the folder named above
+	 * @returns a discord.js Collection<string, string> (extends the javascript map) where the key is the path to the gathered folder(s) and the value is the name of each folder
+	 */
 	protected static async GetFolders(folderName: string, pathToFolder: string): Promise<Collection<string, string>> {
 		const folderCollection: Collection<string, string> = new Collection();
 		const folderPath: string = path.join(pathToFolder, folderName);
