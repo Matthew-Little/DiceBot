@@ -1,5 +1,6 @@
-import type { CommandInteraction } from 'discord.js';
+import type { CommandInteraction, GuildMember } from 'discord.js';
 import Command from '../../models/Command.ts';
+import CommandError from '../../error/CommandError.ts';
 
 export default class User extends Command {
 	constructor() {
@@ -12,8 +13,14 @@ export default class User extends Command {
 	 * @returns Promise<void>
 	 */
 	async Execute(interaction: CommandInteraction): Promise<void> {
-		await interaction.reply(`This command was run by ${interaction.user.username}.`);
-		//interaction.member may be null and member has type(s) GuildMember | APIInteractionGuildMember whose joinedAt/joined_at properties are named inconsistently
-		//await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`);
+		const guildMember: GuildMember = interaction.member as GuildMember;
+		if (!guildMember) {
+			throw new CommandError(`The guild member was not found when executing command ${interaction.commandName}`);
+		}
+		if (!interaction.user) {
+			throw new CommandError(`The user was not found when executing the command ${interaction.commandName}`);
+		}
+
+		await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${guildMember.joinedAt}.`);
 	}
 }
