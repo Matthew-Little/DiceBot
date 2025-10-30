@@ -38,7 +38,8 @@ export default abstract class BaseLoader {
 		const folders: Collection<string, string> = await this.GetFolders(rootFolderName, pathToRootFolder);
 
 		folders.forEach((value, key) => {
-			const filePath: string = path.join(key, value);
+			//use the path (value) and the key (file/foldername) to get a full file path
+			const filePath: string = path.join(value, key);
 			filePaths.push(filePath)
 		});
 
@@ -54,11 +55,14 @@ export default abstract class BaseLoader {
 	protected static async GetFolders(rootFolderName: string, pathToRootFolder: string): Promise<Collection<string, string>> {
 		const folderCollection: Collection<string, string> = new Collection();
 		const folderPath: string = path.join(pathToRootFolder, rootFolderName);
+		console.log(folderPath);
 		//readdirSync returns an array of file/folder names in the directory whose path is passed as an argument
 		const folders: string[] = fs.readdirSync(folderPath);
+		console.log(folders);
 
 		for (const folder of folders) {
-			folderCollection.set(folderPath, folder);
+			//Set folder as the key as the path does not change and will overwrite instead
+			folderCollection.set(folder, folderPath);
 		}
 
 		return folderCollection;
