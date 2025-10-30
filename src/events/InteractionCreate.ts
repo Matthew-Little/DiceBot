@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction, Events, MessageFlags, type Interaction } from "discord.js";
-import Event from "../models/Event.ts";
-import type CustomClient from "../models/CustomClient.ts";
+import Event from "../Models/Event.ts";
+import type CustomClient from "../Models/CustomClient.ts";
 
 /**
  * This event is the handler of the various commands created for the bot

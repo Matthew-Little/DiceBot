@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { Collection, REST, Routes } from 'discord.js';
 import type { RESTPutAPIApplicationCommandsResult } from 'discord.js';
 import config from './config/config.json' with {type: 'json'};
-import type Command from './models/Command.ts';
+import type Command from './Models/Command.ts';
 import CommandLoader from './utils/CommandLoader.ts';
 
 const __filename = fileURLToPath(import.meta.url);

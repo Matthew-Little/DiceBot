@@ -1,5 +1,5 @@
-import Event from "../models/Event.ts";
-import BaseLoader from "../models/BaseLoader.ts";
+import Event from "../Models/Event.ts";
+import BaseLoader from "../Models/BaseLoader.ts";
 
 /**
  * Specific Event Loader
