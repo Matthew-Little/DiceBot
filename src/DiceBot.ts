@@ -13,11 +13,8 @@ const __dirname = path.dirname(__filename);
 
 //Create a new client instance
 const client: CustomClient = new Client({ intents: [GatewayIntentBits.Guilds] }) as CustomClient;
-
-client.cooldowns = new Collection();
-
-//Load commands and events
-client.commands = await CommandLoader.LoadCommands(__dirname);
+await client.Initialize(); //ensure client is initialized before attempting login
+//Load events
 const eventList: Event[] = await EventLoader.LoadEvents(__dirname);
 
 //set up event listeners for all loaded events

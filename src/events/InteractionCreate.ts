@@ -14,8 +14,8 @@ export default class InteractionCreate extends Event<[ChatInputCommandInteractio
 
 	async Execute(interaction: ChatInputCommandInteraction): Promise<void> {
 		const client: CustomClient = interaction.client as CustomClient;
-		const command: Command = client.commands.get(interaction.commandName)!;
-		const cooldowns = client.cooldowns;
+		const command: Command = client.GetCommands().get(interaction.commandName)!;
+		const cooldowns = client.GetCooldowns();
 
 		if (!command) {
 			interaction.reply({ content: `This command does not exist`, flags: MessageFlags.Ephemeral, });
