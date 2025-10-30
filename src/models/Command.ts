@@ -7,6 +7,7 @@ import type IExecutable from "../interfaces/IExecutable.ts";
 export default abstract class Command implements IExecutable<[CommandInteraction]> {
 	name: string;
 	description: string;
+	cooldown: number;
 
 	/**
 	 * All commands are required to be Executable and this abstract function upholds and enforces that contract
@@ -15,8 +16,9 @@ export default abstract class Command implements IExecutable<[CommandInteraction
 	 */
 	abstract Execute(interaction: CommandInteraction): void | Promise<void>
 
-	constructor(name: string, description: string) {
+	constructor(name: string, description: string, cooldown: number = 0) {
 		this.name = name;
 		this.description = description;
+		this.cooldown = cooldown;
 	}
 }

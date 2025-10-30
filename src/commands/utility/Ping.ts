@@ -8,7 +8,7 @@ export default class Ping extends Command {
 
 	//I don't love this look for other options
 	constructor() {
-		super('ping', 'Replies with Pong');
+		super('ping', 'Replies with Pong', 5);
 	}
 
 	async Execute(interaction: CommandInteraction): Promise<void> {

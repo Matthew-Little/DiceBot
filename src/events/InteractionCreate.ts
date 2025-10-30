@@ -1,11 +1,12 @@
-import { ChatInputCommandInteraction, Events, MessageFlags, type Interaction } from "discord.js";
+import { ChatInputCommandInteraction, Events, MessageFlags } from "discord.js";
 import Event from "../models/Event.ts";
 import CustomClient from "../models/CustomClient.ts";
+import type Command from "../models/Command.ts";
 
 /**
  * This event is the handler of the various commands created for the bot
  */
-export default class InteractionCreate extends Event<[Interaction]> {
+export default class InteractionCreate extends Event<[ChatInputCommandInteraction]> {
 
 	constructor() {
 		super(Events.InteractionCreate, false);
@@ -13,10 +14,10 @@ export default class InteractionCreate extends Event<[Interaction]> {
 
 	async Execute(interaction: ChatInputCommandInteraction): Promise<void> {
 		const client: CustomClient = interaction.client as CustomClient;
-		const command = client.commands.get(interaction.commandName);
+		const command: Command = client.commands.get(interaction.commandName)!;
 
 		if (!command) {
-			console.error(`No command matching ${interaction.commandName} was found.`);
+			interaction.reply({ content: `This command does not exist`, ephemeral: true, });
 			return;
 		}
 
