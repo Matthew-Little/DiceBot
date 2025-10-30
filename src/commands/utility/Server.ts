@@ -2,17 +2,15 @@ import type { CommandInteraction } from "discord.js";
 import Command from '../../models/Command.ts';
 import CommandError from "../../error/CommandError.ts";
 
+/**
+ * A command that provides generic info about the server it is run in
+ */
 export default class Server extends Command {
 
 	constructor() {
 		super('server', 'Provides information about the server.');
 	}
 
-	/**
-	 * A way to check the current server and how many members it has
-	 * @param interaction 
-	 * @returns Promise<void>
-	 */
 	async Execute(interaction: CommandInteraction): Promise<void> {
 
 		if (!interaction.guild) {

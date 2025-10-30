@@ -4,7 +4,7 @@ import BaseLoader from "../models/BaseLoader.ts";
 
 export default class EventLoader extends BaseLoader {
 	/**
-	 * static method to easily load events from a path
+	 * static method to easily load events from a path to an 'events' folder
 	 * @param pathToEvents 
 	 * @returns Promise<Event[]>
 	 */

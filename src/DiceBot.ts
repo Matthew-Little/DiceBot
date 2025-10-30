@@ -14,12 +14,12 @@ const __dirname = path.dirname(__filename);
 //Create a new client instance
 const client: CustomClient = new Client({ intents: [GatewayIntentBits.Guilds] }) as CustomClient;
 
+//Load commands and events
 client.commands = await CommandLoader.LoadCommands(__dirname);
-
 const eventList: Event[] = await EventLoader.LoadEvents(__dirname);
 
+//set up event listeners for all loaded events
 for (const event of eventList) {
-
 	if (event.once) {
 		client.once(event.name, (...args) => event.Execute(...args));
 	} else {
