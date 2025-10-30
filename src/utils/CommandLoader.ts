@@ -26,12 +26,7 @@ export default class CommandLoader extends BaseLoader {
 				//pathToFileURL handles file paths for all OS and properly encodes special characters
 				const filePath = pathToFileURL(joinedPath).href;
 				const command: Command = new (await import(filePath)).default();
-				if ('data' in command && 'Execute' in command) {
-					commands.set(command.name, command);
-
-				} else {
-					console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property`);
-				}
+				commands.set(command.name, command);
 			}
 		}
 

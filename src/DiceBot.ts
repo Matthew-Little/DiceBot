@@ -28,4 +28,9 @@ for (const event of eventList) {
 }
 
 //Log in to Discord with your client's token
-client.login(config.token);
+try {
+	client.login(config.token);
+} catch (error) {
+	console.error(error);
+}
+

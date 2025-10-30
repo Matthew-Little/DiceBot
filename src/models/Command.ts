@@ -1,4 +1,4 @@
-import { CommandInteraction, SlashCommandBuilder } from "discord.js";
+import { CommandInteraction } from "discord.js";
 import type IExecutable from "../interfaces/IExecutable.ts";
 
 /**
@@ -7,8 +7,6 @@ import type IExecutable from "../interfaces/IExecutable.ts";
 export default abstract class Command implements IExecutable<[CommandInteraction]> {
 	name: string;
 	description: string;
-
-	data: SlashCommandBuilder;
 
 	/**
 	 * All commands are required to be Executable and this abstract function upholds and enforces that contract
@@ -20,6 +18,5 @@ export default abstract class Command implements IExecutable<[CommandInteraction
 	constructor(name: string, description: string) {
 		this.name = name;
 		this.description = description;
-		this.data = new SlashCommandBuilder().setName(this.name).setDescription(this.description);
 	}
 }
