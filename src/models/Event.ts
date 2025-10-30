@@ -1,4 +1,4 @@
-import type IExecutable from "../Interfaces/IExecutable.ts";
+import type IExecutable from "../interfaces/IExecutable.ts";
 
 /**
  * base class for all Events handled by our bot to inherit from that enforces the IExecutable contract

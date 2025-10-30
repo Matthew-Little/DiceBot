@@ -1,5 +1,5 @@
 import { CommandInteraction, SlashCommandBuilder } from "discord.js";
-import type IExecutable from "../Interfaces/IExecutable.ts";
+import type IExecutable from "../interfaces/IExecutable.ts";
 
 /**
  * base class for all Commands to inherit from that enforces the IExecutabe contract

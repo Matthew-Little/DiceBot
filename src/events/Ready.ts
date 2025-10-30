@@ -1,5 +1,5 @@
 import { Client, Events } from "discord.js";
-import Event from "../Models/Event.ts";
+import Event from "../models/Event.ts";
 
 /**
  * Basic event that recieves the client when it is ready to let you know the bot is ready to recieve commands / react to events

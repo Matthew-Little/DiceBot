@@ -2,8 +2,8 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { Client, GatewayIntentBits } from "discord.js";
 import config from './config/config.json' with {type: "json"}; //modern syntax for importing json file as an object to access its properties
-import CustomClient from './Models/CustomClient.ts';
-import type Event from "./Models/Event.ts";
+import CustomClient from './models/CustomClient.ts';
+import type Event from "./models/Event.ts";
 import CommandLoader from "./utils/CommandLoader.ts";
 import EventLoader from "./utils/EventLoader.ts";
 

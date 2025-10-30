@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type Command from "../Models/Command.ts";
+import type Command from "../models/Command.ts";
 import { Collection } from "discord.js";
 import { pathToFileURL } from 'node:url';
-import BaseLoader from '../Models/BaseLoader.ts';
+import BaseLoader from '../models/BaseLoader.ts';
 
 /**
  * Specific CommandLoader 

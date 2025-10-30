@@ -1,5 +1,5 @@
 import type { CommandInteraction } from 'discord.js';
-import Command from '../../Models/Command.ts';
+import Command from '../../models/Command.ts';
 
 /**
  * A basic command for testing the bot is online and responsive

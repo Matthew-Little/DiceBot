@@ -1,5 +1,5 @@
 import type { CommandInteraction, GuildMember } from 'discord.js';
-import Command from '../../Models/Command.ts';
+import Command from '../../models/Command.ts';
 import CommandError from '../../error/CommandError.ts';
 
 /**
