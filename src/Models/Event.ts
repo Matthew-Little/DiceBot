@@ -1,6 +1,9 @@
-import type IEvent from "../Interfaces/IEvent.ts";
+import type IExecutable from "../Interfaces/IExecutable.ts";
 
-export default abstract class Event<T extends any[] = any[]> implements IEvent<T> {
+/**
+ * base class for all Events handled by our bot to inherit from that enforces the IExecutable contract
+ */
+export default abstract class Event<T extends any[] = any[]> implements IExecutable<T> {
 
 	name: string;
 	once: boolean;
@@ -11,7 +14,7 @@ export default abstract class Event<T extends any[] = any[]> implements IEvent<T
 	}
 
 	/**
-	 * Abstract function for fufilling contract
+	 * All events are required to be Executable and this abstract function upholds and enforces that contract
 	 * @param args 
 	 * @returns void | Promise<void>
 	 */

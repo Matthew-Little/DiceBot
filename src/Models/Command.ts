@@ -1,14 +1,17 @@
 import { CommandInteraction, SlashCommandBuilder } from "discord.js";
-import type IEvent from '../Interfaces/IEvent.ts'
+import type IExecutable from "../Interfaces/IExecutable.ts";
 
-export default abstract class Command implements IEvent<[CommandInteraction]> {
+/**
+ * base class for all Commands to inherit from that enforces the IExecutabe contract
+ */
+export default abstract class Command implements IExecutable<[CommandInteraction]> {
 	name: string;
 	description: string;
 
 	data: SlashCommandBuilder;
 
 	/**
-	 * Abstract Execute function for fufilling contract(s)
+	 * All commands are required to be Executable and this abstract function upholds and enforces that contract
 	 * @param interaction 
 	 * @returns void | Promise<void>
 	 */

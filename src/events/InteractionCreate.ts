@@ -2,16 +2,15 @@ import { ChatInputCommandInteraction, Events, MessageFlags, type Interaction } f
 import Event from "../models/Event.ts";
 import type CustomClient from "../models/CustomClient.ts";
 
+/**
+ * This event is the handler of the various commands created for the bot
+ */
 export default class InteractionCreate extends Event<[Interaction]> {
 
 	constructor() {
 		super(Events.InteractionCreate, false);
 	}
-	/**
-	 * This is the command event handler that recieves and handles all chat input commands
-	 * @param interaction 
-	 * @returns Promise<void>
-	 */
+
 	async Execute(interaction: ChatInputCommandInteraction): Promise<void> {
 		const client: CustomClient = interaction.client as CustomClient;
 		const command = client.commands.get(interaction.commandName);

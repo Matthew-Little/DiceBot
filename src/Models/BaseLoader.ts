@@ -3,6 +3,9 @@ import fs from "node:fs";
 import { pathToFileURL } from "node:url";
 import { Collection } from "discord.js";
 
+/**
+ * This class provides the base loading functionality required to load the events and commands from their respective directories
+ */
 export default abstract class BaseLoader {
 
 	/**

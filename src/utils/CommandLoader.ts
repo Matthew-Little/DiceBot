@@ -5,6 +5,9 @@ import { Collection } from "discord.js";
 import { pathToFileURL } from 'node:url';
 import BaseLoader from '../models/BaseLoader.ts';
 
+/**
+ * Specific CommandLoader 
+ */
 export default class CommandLoader extends BaseLoader {
 
 	/**
