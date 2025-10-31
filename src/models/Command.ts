@@ -16,7 +16,7 @@ export default abstract class Command implements IExecutable<[CommandInteraction
 	 */
 	abstract Execute(interaction: CommandInteraction): void | Promise<void>
 
-	constructor(name: string, description: string, cooldown: number | null) {
+	constructor(name: string, description: string, cooldown: number | null = null) {
 		this.name = name;
 		this.description = description;
 		this.cooldown = cooldown;

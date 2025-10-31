@@ -7,7 +7,7 @@ import CommandError from '../../error/CommandError.ts';
  */
 export default class User extends Command {
 	constructor() {
-		super('user', 'Provides information about the user.', null);
+		super('user', 'Provides information about the user.');
 	}
 
 	async Execute(interaction: CommandInteraction): Promise<void> {

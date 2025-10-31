@@ -8,7 +8,7 @@ import CommandError from "../../error/CommandError.ts";
 export default class Server extends Command {
 
 	constructor() {
-		super('server', 'Provides information about the server.', null);
+		super('server', 'Provides information about the server.');
 	}
 
 	async Execute(interaction: CommandInteraction): Promise<void> {
