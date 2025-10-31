@@ -65,4 +65,7 @@ export default abstract class BaseLoader {
 
 		return folderCollection;
 	}
+	//TODO:
+	//come up with condition (REGEX?) that determines if it is looking at folder(s) or file(s) (if name contains a . it is a file name?)
+	//then we can come up with a function that will check this condition while trying to load typescript files. async LoadModules<T>(...): Promise<T[]> {...}
 }

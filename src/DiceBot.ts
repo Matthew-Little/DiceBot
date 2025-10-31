@@ -1,7 +1,8 @@
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { Client, GatewayIntentBits } from "discord.js";
-import config from './config/config.json' with {type: "json"}; //modern syntax for importing json file as an object to access its properties
+//modern syntax for importing json file as an object to access its properties
+import config from './config/config.json' with {type: "json"};
 import CustomClient from './models/CustomClient.ts';
 import type Event from "./models/Event.ts";
 import EventLoader from "./utils/EventLoader.ts";
@@ -12,7 +13,8 @@ const __dirname = path.dirname(__filename);
 
 //Create a new client instance
 const client: CustomClient = new Client({ intents: [GatewayIntentBits.Guilds] }) as CustomClient;
-await client.Initialize(); //ensure client is initialized before attempting login
+//ensure client is initialized before attempting login
+await client.Initialize();
 //Load events
 const eventList: Event[] = await EventLoader.LoadEvents(__dirname);
 

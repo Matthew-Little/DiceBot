@@ -3,3 +3,10 @@ This is an update to the original [DiscordBot](https://github.com/Matthew-Little
 
 ## What is DiceBot?
 "Dice Bot" is a discord bot created to assist me in managing any of the discord servers I administrate as well as to assist me in running table top games that require dice (i.e. Tabletop Role Playing Games such as Dungeons and Dragons) using discord as a medium for connecting with the players.
+
+#### Features
+- Typical bot features outlined in the [discord.js guide](https://discordjs.guide/legacy) (WIP)
+- Dice Rolling command(s) (random number generation) functionality (Not Started)
+- Logging (Investigating)
+- Error Handling (Investigating)
+- cleaning up event and command loaders (WIP)
