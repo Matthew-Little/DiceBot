@@ -1,4 +1,4 @@
-import type { CommandInteraction, GuildMember } from 'discord.js';
+import type { ChatInputCommandInteraction, GuildMember } from 'discord.js';
 import Command from '../../models/Command.ts';
 import CommandError from '../../error/CommandError.ts';
 
@@ -10,7 +10,7 @@ export default class User extends Command {
 		super('user', 'Provides information about the user.');
 	}
 
-	async Execute(interaction: CommandInteraction): Promise<void> {
+	async Execute(interaction: ChatInputCommandInteraction): Promise<void> {
 		const guildMember: GuildMember = interaction.member as GuildMember;
 		if (!guildMember) {
 			throw new CommandError(`The guild member was not found when executing command ${interaction.commandName}`);

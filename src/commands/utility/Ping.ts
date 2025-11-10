@@ -1,4 +1,4 @@
-import type { CommandInteraction } from 'discord.js';
+import type { ChatInputCommandInteraction } from 'discord.js';
 import Command from '../../models/Command.ts';
 
 const PING_COOLDOWN: number = 5;
@@ -13,7 +13,7 @@ export default class Ping extends Command {
 		super('ping', 'Replies with Pong', PING_COOLDOWN);
 	}
 
-	async Execute(interaction: CommandInteraction): Promise<void> {
+	async Execute(interaction: ChatInputCommandInteraction): Promise<void> {
 		await interaction.reply('Pong!');
 	}
 }

@@ -1,4 +1,4 @@
-import type { CommandInteraction } from "discord.js";
+import type { ChatInputCommandInteraction } from "discord.js";
 import Command from '../../models/Command.ts';
 import CommandError from "../../error/CommandError.ts";
 
@@ -11,7 +11,7 @@ export default class Server extends Command {
 		super('server', 'Provides information about the server.');
 	}
 
-	async Execute(interaction: CommandInteraction): Promise<void> {
+	async Execute(interaction: ChatInputCommandInteraction): Promise<void> {
 
 		if (!interaction.guild) {
 			throw new CommandError(`No guild found when executing command: ${interaction.commandName}`);
